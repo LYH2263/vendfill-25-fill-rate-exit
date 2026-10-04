@@ -6,7 +6,17 @@ from sqlalchemy.orm import Session
 from app.database import get_db
 from app.models.models import Lane, Location, RefillOrder
 from app.services.fill_engine import build_fill_lines, summarize
+from app.services.inspection import inspect_location
 router = APIRouter(prefix="/refills", tags=["refills"])
+
+@router.get("/inspection")
+def inspect_refill(location_id: int = 1, db: Session = Depends(get_db)):
+    """只读巡检：按当前库存给待补件数/满仓道数/超占道数。
+
+    不写库、不落补货单、不改已有单据，也绝不调用 /latest
+    （该入口在无单时会自动补落一张）。code: 0 对账成功 / 2 点位不存在 / 3 超占混入满仓。
+    """
+    return inspect_location(db, location_id)
 
 @router.post("/run")
 def run_refill(location_id: int = 1, db: Session = Depends(get_db)):

@@ -14,6 +14,7 @@ import { RouterLink, RouterView } from 'vue-router'
         <RouterLink to="/lanes" class="vf-site-btn">货道格子</RouterLink>
         <RouterLink to="/sales" class="vf-site-btn">销量</RouterLink>
         <RouterLink to="/refills" class="vf-site-btn">补货小票</RouterLink>
+        <RouterLink to="/inspection" class="vf-site-btn">只读巡检</RouterLink>
         <RouterLink to="/full" class="vf-site-btn">满仓</RouterLink>
         <RouterLink to="/summary" class="vf-site-btn">汇总</RouterLink>
       </aside>

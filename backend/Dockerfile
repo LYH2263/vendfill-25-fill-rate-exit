@@ -5,6 +5,7 @@ COPY requirements.txt .
 RUN pip install --no-cache-dir -r requirements.txt
 COPY app ./app
 COPY tests ./tests
-COPY pytest.ini .
+COPY conftest.py pytest.ini ./
+COPY inspect_cli.py .
 EXPOSE 9800
 CMD ["uvicorn", "app.main:app", "--host", "0.0.0.0", "--port", "9800"]
